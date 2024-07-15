@@ -30,7 +30,9 @@ def validate_data(values):
     Raises ValueError if string cannot be converted into float,
     or if there aren't exactly five values.
     """
+    print(values)
     try:
+        [float(value) for value in values]
         if len(values) != 5:
             raise ValueError(
                 f"Five values required, you entered {len(values)}"
@@ -38,5 +40,5 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
 
-
+ 
 collect_total_hours()    
