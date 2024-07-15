@@ -20,6 +20,23 @@ def collect_total_hours():
     print("Like this: 40,40,40,20,20\n")
 
     data_str = input("Enter total hours here: ")
-    print(f"The hours provided are {data_str}")
+    
+    total_hours_data = data_str.split(",")
+    validate_data(total_hours_data)
+
+def validate_data(values):
+    """
+    Inside the try converts all string values into floats.
+    Raises ValueError if string cannot be converted into float,
+    or if there aren't exactly five values.
+    """
+    try:
+        if len(values) != 5:
+            raise ValueError(
+                f"Five values required, you entered {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+
 
 collect_total_hours()    
