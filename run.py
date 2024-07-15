@@ -11,6 +11,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('employee_payroll')
 
-total_hours = SHEET.worksheet('total_hours')
-data = total_hours.get_all_values()
-print(data)
+def collect_total_hours():
+    """
+    Ask the user to input total hours data for each employee
+    """
+    print("Please Enter total hours from the previous week.")
+    print("Data should be five numbers from emp001 to emp005, separated by commas.")
+    print("Like this: 40,40,40,20,20\n")
+
+    data_str = input("Enter total hours here: ")
+    print(f"The hours provided are {data_str}")
+
+collect_total_hours()    
