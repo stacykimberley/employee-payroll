@@ -113,6 +113,32 @@ def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
         gross_pay_data.append(gross_pay)
     
     return gross_pay_data   
+
+
+def calculate_net_pay_data(gross_pay_row):
+    """
+    Multiply gross pay by 0.8 to subtract tax
+    All employees pay a tax rate of 20%
+    """
+    print("Calculating net pay...\n")
+    net_pay_data = [gross_pay * 0.8 for gross_pay in gross_pay_row]
+    return net_pay_data
+
+
+def create_pay_stub(total_hours_row, overtime_hours_row, gross_pay_row, net_pay_row):
+    """
+    Display pay stub with details including ID, total hours worked,
+    overtime hours worked, gross pay, and net pay.
+    """
+    print("Employee Details:\n")
+    employee_ids = ['emp001', 'emp002', 'emp003', 'emp004', 'emp005']
+    for emp_id, total_hours, overtime_hours, gross_pay, net_pay in zip(employee_ids, total_hours_row, overtime_hours_row, gross_pay_row, net_pay_row):
+        print(f"Employee ID: {emp_id}")
+        print(f"Total Hours Worked: {total_hours}")
+        print(f"Overtime Hours Worked: {overtime_hours}")
+        print(f"Gross Pay: ${gross_pay:.2f}")
+        print(f"Net Pay: ${net_pay:.2f}")
+        print("-" * 20)    
      
 
 def main():
@@ -128,6 +154,9 @@ def main():
     update_worksheet(overtime_hours_data, "overtime_hours")
     new_gross_pay_data = calculate_gross_pay_data(total_hours_data, overtime_hours_data)
     update_worksheet(new_gross_pay_data, "gross_pay")
+    new_net_pay_data = calculate_net_pay_data(new_gross_pay_data)
+    update_worksheet(new_net_pay_data, "net_pay")
+    create_pay_stub(total_hours_data, overtime_hours_data, new_gross_pay_data, new_net_pay_data)
 
 
 print("Hello! Welcome to Employee Payroll Data Automation.")
