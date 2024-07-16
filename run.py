@@ -51,5 +51,17 @@ def validate_data(values):
 
     return True 
 
- 
+
+def update_total_hours_worksheet(data):
+    """
+    Update total hours worksheet, data provided is added to a new row.
+    """
+    print("Updating total hours worksheet....\n")
+    total_hours_worksheet = SHEET.worksheet("total_hours")
+    total_hours_worksheet.append_row(data)
+    print("Total hours data updates succesfully.\n")
+
+
 data = collect_total_hours()
+total_hours_data = [float(num) for num in data]
+update_total_hours_worksheet(total_hours_data)
