@@ -121,7 +121,17 @@ def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
         gross_pay = (hourly_rate * total_hours) + (hourly_rate * overtime_hours * 1.5)
         gross_pay_data.append(gross_pay)
     
-    return gross_pay_data    
+    return gross_pay_data   
+
+
+def update_gross_pay_worksheet(data):
+    """
+    Update gross pay worksheet, data calculated is added to a new row.
+    """
+    print("Updating gross pay worksheet....\n")
+    gross_pay_worksheet = SHEET.worksheet("gross_pay")
+    gross_pay_worksheet.append_row(data)
+    print("Gross pay data updated succesfully.\n")     
 
 def main():
     """
@@ -135,6 +145,7 @@ def main():
     overtime_hours_data = [float(num) for num in data]
     update_overtime_hours_worksheet(data)
     new_gross_pay_data = calculate_gross_pay_data(total_hours_data, overtime_hours_data)
+    update_gross_pay_worksheet(new_gross_pay_data)
 
 
 main()
