@@ -12,6 +12,21 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('employee_payroll')
 
+users ={
+    'user': 'password'
+}
+
+def validate_user():
+    while True:
+        username = input("Enter your usename: ")
+        password = input("Enter your password: ")
+
+        if username in users and users[username] == password:
+            print("Login succesful!")
+            return True
+        else:
+            print("Your username or password is incorrect. Please try again.")
+
 
 def collect_total_hours():
     """
@@ -31,6 +46,8 @@ def collect_total_hours():
             break
 
     return total_hours_data   
+
+
 
 
 def validate_data(values):
@@ -62,6 +79,14 @@ def update_total_hours_worksheet(data):
     print("Total hours data updates succesfully.\n")
 
 
-data = collect_total_hours()
-total_hours_data = [float(num) for num in data]
-update_total_hours_worksheet(total_hours_data)
+def main():
+    """
+    Run all program functions
+    """
+    validate_user()
+    data = collect_total_hours()
+    total_hours_data = [float(num) for num in data]
+    update_total_hours_worksheet(total_hours_data)
+
+
+main()
