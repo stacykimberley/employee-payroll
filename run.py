@@ -86,24 +86,15 @@ def validate_data(values):
     return True 
 
 
-def update_total_hours_worksheet(data):
+def update_worksheet(data, worksheet):    
     """
-    Update total hours worksheet, data provided is added to a new row.
+    Receives a list of data to be inserted into a worksheet
+    Relevant worksheet is updated with provided data
     """
-    print("Updating total hours worksheet....\n")
-    total_hours_worksheet = SHEET.worksheet("total_hours")
-    total_hours_worksheet.append_row(data)
-    print("Total hours data updates succesfully.\n")
-
-
-def update_overtime_hours_worksheet(data):
-    """
-    Update overtime hours worksheet, data provided is added to a new row.
-    """
-    print("Updating overtime hours worksheet....\n")
-    overtime_hours_worksheet = SHEET.worksheet("overtime_hours")
-    overtime_hours_worksheet.append_row(data)
-    print("Overtime hours data updated succesfully.\n")
+    print(f"Updating {worksheet} worksheet....\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet updated succesfully.\n")
 
 
 def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
@@ -122,16 +113,7 @@ def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
         gross_pay_data.append(gross_pay)
     
     return gross_pay_data   
-
-
-def update_gross_pay_worksheet(data):
-    """
-    Update gross pay worksheet, data calculated is added to a new row.
-    """
-    print("Updating gross pay worksheet....\n")
-    gross_pay_worksheet = SHEET.worksheet("gross_pay")
-    gross_pay_worksheet.append_row(data)
-    print("Gross pay data updated succesfully.\n")     
+     
 
 def main():
     """
@@ -140,12 +122,13 @@ def main():
     validate_user()
     data = collect_total_hours()
     total_hours_data = [float(num) for num in data]
-    update_total_hours_worksheet(total_hours_data)
+    update_worksheet(total_hours_data, "total_hours")
     data = collect_overtime_hours()
     overtime_hours_data = [float(num) for num in data]
-    update_overtime_hours_worksheet(data)
+    update_worksheet(overtime_hours_data, "overtime_hours")
     new_gross_pay_data = calculate_gross_pay_data(total_hours_data, overtime_hours_data)
-    update_gross_pay_worksheet(new_gross_pay_data)
+    update_worksheet(new_gross_pay_data, "gross_pay")
 
 
+print("Hello! Welcome to Employee Payroll Data Automation.")
 main()
