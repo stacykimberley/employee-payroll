@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials 
-
+from pprint import pprint
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -112,9 +112,10 @@ def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
     Multiply overtime hours by hourly rate by 1.5
     Gross pay is the total of total hours and overtime hours pay
     """
-    
-
-
+    print("Calculating gross pay...\n")
+    hourly_rate = SHEET.worksheet("hourly_rate").get_all_values()
+    hourly_rate_row = hourly_rate[-1]
+    print(hourly_rate_row)
 
 def main():
     """
@@ -124,8 +125,10 @@ def main():
     data = collect_total_hours()
     total_hours_data = [float(num) for num in data]
     update_total_hours_worksheet(total_hours_data)
-    collect_overtime_hours()
+    data = collect_overtime_hours()
+    overtime_hours_data = [float(num) for num in data]
     update_overtime_hours_worksheet(data)
+    calculate_gross_pay_data(total_hours_data, overtime_hours_data)
 
 
 main()
