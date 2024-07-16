@@ -48,7 +48,24 @@ def collect_total_hours():
     return total_hours_data   
 
 
+def collect_overtime_hours():
+    """
+    Ask the user to input overtime hours data for each employee
+    """
+    while True:
+        print("Please Enter overtime hours from the previous week.")
+        print("Data should be five numbers from emp001 to emp005, separated by commas.")
+        print("Like this: 1,2,3,4,4.5\n")
 
+        data_str = input("Enter overtime hours here: ")
+        
+        overtime_hours_data = data_str.split(",")
+
+        if validate_data(overtime_hours_data):
+            print("Data is valid!")
+            break
+
+    return overtime_hours_data
 
 def validate_data(values):
     """
@@ -79,6 +96,26 @@ def update_total_hours_worksheet(data):
     print("Total hours data updates succesfully.\n")
 
 
+def update_overtime_hours_worksheet(data):
+    """
+    Update overtime hours worksheet, data provided is added to a new row.
+    """
+    print("Updating overtime hours worksheet....\n")
+    overtime_hours_worksheet = SHEET.worksheet("overtime_hours")
+    overtime_hours_worksheet.append_row(data)
+    print("Overtime hours data updates succesfully.\n")
+
+
+def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
+    """
+    Multiply total hours by hourly rate
+    Multiply overtime hours by hourly rate by 1.5
+    Gross pay is the total of total hours and overtime hours pay
+    """
+    
+
+
+
 def main():
     """
     Run all program functions
@@ -87,6 +124,8 @@ def main():
     data = collect_total_hours()
     total_hours_data = [float(num) for num in data]
     update_total_hours_worksheet(total_hours_data)
+    collect_overtime_hours()
+    update_overtime_hours_worksheet(data)
 
 
 main()
