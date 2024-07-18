@@ -1,6 +1,10 @@
 import gspread
-from google.oauth2.service_account import Credentials 
+from google.oauth2.service_account import Credentials
 from colorama import init, Fore
+
+
+init()
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -13,9 +17,10 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('employee_payroll')
 
-users ={
+users = {
     'user': 'password'
 }
+
 
 def validate_user():
     while True:
@@ -26,7 +31,8 @@ def validate_user():
             print(Fore.GREEN + "Login succesful!" + Fore.RESET)
             return True
         else:
-            print(Fore.RED + "Your username or password is incorrect. Please try again." + Fore.RESET)
+            print(Fore.RED + "Your username or password is incorrect. \
+                  Please try again." + Fore.RESET)
 
 
 def collect_total_hours():
@@ -35,18 +41,19 @@ def collect_total_hours():
     """
     while True:
         print("Please Enter total hours from the previous week.")
-        print("Data should be five numbers from emp001 to emp005, separated by commas.")
+        print("Data should be five numbers from emp001 to emp005, \
+              separated by commas.")
         print("Like this: 40,40,40,20,20\n")
 
         data_str = input("Enter total hours here: ")
-        
+
         total_hours_data = data_str.split(",")
 
         if validate_data(total_hours_data):
             print(Fore.GREEN + "Data is valid!" + Fore.RESET)
             break
 
-    return total_hours_data   
+    return total_hours_data
 
 
 def collect_overtime_hours():
@@ -55,11 +62,12 @@ def collect_overtime_hours():
     """
     while True:
         print("Please Enter overtime hours from the previous week.")
-        print("Data should be five numbers from emp001 to emp005, separated by commas.")
+        print("Data should be five numbers from emp001 to emp005, \
+        separated by commas.")
         print("Like this: 1,2,3,4,4.5\n")
 
         data_str = input("Enter overtime hours here: ")
-        
+
         overtime_hours_data = data_str.split(",")
 
         if validate_data(overtime_hours_data):
@@ -67,6 +75,7 @@ def collect_overtime_hours():
             break
 
     return overtime_hours_data
+
 
 def validate_data(values):
     """
@@ -84,10 +93,10 @@ def validate_data(values):
         print(f"Invalid data: {e}, please try again.\n")
         return False
 
-    return True 
+    return True
 
 
-def update_worksheet(data, worksheet):    
+def update_worksheet(data, worksheet):
     """
     Receives a list of data to be inserted into a worksheet
     Relevant worksheet is updated with provided data
@@ -107,13 +116,15 @@ def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
     print("Calculating gross pay...\n")
     hourly_rate = SHEET.worksheet("hourly_rate").get_all_values()
     hourly_rate_row = [float(rate) for rate in hourly_rate[-1]]
-    
+
     gross_pay_data = []
-    for hourly_rate, total_hours, overtime_hours in zip(hourly_rate_row, total_hours_row, overtime_hours_row):
-        gross_pay = (hourly_rate * total_hours) + (hourly_rate * overtime_hours * 1.5)
+    for hourly_rate, total_hours, overtime_hours in \
+            zip(hourly_rate_row, total_hours_row, overtime_hours_row):
+        gross_pay = (hourly_rate * total_hours) + \
+         (hourly_rate * overtime_hours * 1.5)
         gross_pay_data.append(gross_pay)
-    
-    return gross_pay_data   
+
+    return gross_pay_data
 
 
 def calculate_net_pay_data(gross_pay_row):
@@ -126,21 +137,24 @@ def calculate_net_pay_data(gross_pay_row):
     return net_pay_data
 
 
-def create_pay_stub(total_hours_row, overtime_hours_row, gross_pay_row, net_pay_row):
+def create_pay_stub(total_hours_row, overtime_hours_row,
+                    gross_pay_row, net_pay_row):
     """
     Display pay stub with details including ID, total hours worked,
     overtime hours worked, gross pay, and net pay.
     """
     print("Employee Details:\n")
     employee_ids = ['emp001', 'emp002', 'emp003', 'emp004', 'emp005']
-    for emp_id, total_hours, overtime_hours, gross_pay, net_pay in zip(employee_ids, total_hours_row, overtime_hours_row, gross_pay_row, net_pay_row):
+    for emp_id, total_hours, overtime_hours, gross_pay, net_pay \
+            in zip(employee_ids, total_hours_row, overtime_hours_row,
+                   gross_pay_row, net_pay_row):
         print(f"Employee ID: {emp_id}")
         print(f"Total Hours Worked: {total_hours}")
         print(f"Overtime Hours Worked: {overtime_hours}")
         print(f"Gross Pay: ${gross_pay:.2f}")
         print(f"Net Pay: ${net_pay:.2f}")
-        print("-" * 20)    
-     
+        print("-" * 20)
+
 
 def main():
     """
@@ -153,11 +167,13 @@ def main():
     data = collect_overtime_hours()
     overtime_hours_data = [float(num) for num in data]
     update_worksheet(overtime_hours_data, "overtime_hours")
-    new_gross_pay_data = calculate_gross_pay_data(total_hours_data, overtime_hours_data)
+    new_gross_pay_data = \
+        calculate_gross_pay_data(total_hours_data, overtime_hours_data)
     update_worksheet(new_gross_pay_data, "gross_pay")
     new_net_pay_data = calculate_net_pay_data(new_gross_pay_data)
     update_worksheet(new_net_pay_data, "net_pay")
-    create_pay_stub(total_hours_data, overtime_hours_data, new_gross_pay_data, new_net_pay_data)
+    create_pay_stub(total_hours_data, overtime_hours_data,
+                    new_gross_pay_data, new_net_pay_data)
 
 
 print("Hello! Welcome to Employee Payroll Data Automation.")
