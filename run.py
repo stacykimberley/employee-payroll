@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials 
+from colorama import init, Fore
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,10 +23,10 @@ def validate_user():
         password = input("Enter your password: ")
 
         if username in users and users[username] == password:
-            print("Login succesful!")
+            print(Fore.GREEN + "Login succesful!" + Fore.RESET)
             return True
         else:
-            print("Your username or password is incorrect. Please try again.")
+            print(Fore.RED + "Your username or password is incorrect. Please try again." + Fore.RESET)
 
 
 def collect_total_hours():
@@ -42,7 +43,7 @@ def collect_total_hours():
         total_hours_data = data_str.split(",")
 
         if validate_data(total_hours_data):
-            print("Data is valid!")
+            print(Fore.GREEN + "Data is valid!" + Fore.RESET)
             break
 
     return total_hours_data   
@@ -62,7 +63,7 @@ def collect_overtime_hours():
         overtime_hours_data = data_str.split(",")
 
         if validate_data(overtime_hours_data):
-            print("Data is valid!")
+            print(Fore.GREEN + "Data is valid!" + Fore.RESET)
             break
 
     return overtime_hours_data
@@ -80,7 +81,7 @@ def validate_data(values):
                 f"Five values required, you entered {len(values)}"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(Fore.RED + f"Invalid data: {e}, please try again.\n" + Fore.RESET)
         return False
 
     return True 
@@ -94,7 +95,7 @@ def update_worksheet(data, worksheet):
     print(f"Updating {worksheet} worksheet....\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print(f"{worksheet} worksheet updated succesfully.\n")
+    print(Fore.ORANGE + f"{worksheet} worksheet updated succesfully.\n" + Fore.RESET)
 
 
 def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
