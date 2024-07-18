@@ -46,6 +46,19 @@ I want gross pay to be calculated.
 
 The quiz is developed using Python.
 
+## Future Features
+
+- Give the admin an option to add/ remove an employee
+- Calculate a tax deduction of 40% for employees earning over $40, 000 a year.
+- Have a separate input for holiday hours.
+
+## Technologies used
+
+- GitHub to store the source code.
+- Gitpod chosen IDE to develop the website.
+- Microsoft Word to create testing tables.
+- Code Institute's Gitpod Template to generate the workspace for the project.
+- Code institute learnings for general guidance.
 
 
 
