@@ -196,6 +196,15 @@ The app is developed using Python.
 - Code institute learnings for general guidance.
 - Techsini to create mockup of website on different iOS devices.
 
+## Acknowledgements
+
+I would like to express my gratitude to the following individuals for their contributions and support:
+
+My mentor, Ronan McClelland for great support, advice, learning reasources and guidance throughout this project.
+
+My sister Hazel Hawadi for moral support and help with coding.
+
+Amy Richardson(Cohort Facilitator) for her regular check-ins and support.
 
 
 
