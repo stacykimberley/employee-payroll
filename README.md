@@ -84,9 +84,9 @@ I want gross pay to be calculated.
 8. **Calculate net pay:**
 - Calculate each employee's net pay.
 9. **Update net pay worksheet:**
-Update GoogleSheet with calculated net pay far all employees.
+- Update GoogleSheet with calculated net pay far all employees.
 10. **Create pay stubs:**
--Generate and display pay stubs for all employees
+- Generate and display pay stubs for all employees
 
 ## Colorama
 
