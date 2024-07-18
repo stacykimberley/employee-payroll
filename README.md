@@ -196,6 +196,14 @@ The app is developed using Python.
 - Code institute learnings for general guidance.
 - Techsini to create mockup of website on different iOS devices.
 
+## Credits
+
+### Code
+
+- Code to add username and password from Hazel Hawadi
+- Python learnings from Code institute lessons and modified.
+- Code Institute Love Sandwiches run through lessons and modified.
+
 ## Acknowledgements
 
 I would like to express my gratitude to the following individuals for their contributions and support:
