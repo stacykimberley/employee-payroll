@@ -81,7 +81,7 @@ def validate_data(values):
                 f"Five values required, you entered {len(values)}"
             )
     except ValueError as e:
-        print(Fore.RED + f"Invalid data: {e}, please try again.\n")
+        print(f"Invalid data: {e}, please try again.\n")
         return False
 
     return True 
@@ -95,7 +95,7 @@ def update_worksheet(data, worksheet):
     print(f"Updating {worksheet} worksheet....\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.append_row(data)
-    print(Fore.ORANGE + f"{worksheet} worksheet updated succesfully.\n")
+    print(f"{worksheet} worksheet updated succesfully.\n")
 
 
 def calculate_gross_pay_data(total_hours_row, overtime_hours_row):
@@ -121,7 +121,7 @@ def calculate_net_pay_data(gross_pay_row):
     Multiply gross pay by 0.8 to subtract tax
     All employees pay a tax rate of 20%
     """
-    print(Fore.ORANGE + "Calculating net pay...\n" + Fore.RESET)
+    print("Calculating net pay...\n")
     net_pay_data = [gross_pay * 0.8 for gross_pay in gross_pay_row]
     return net_pay_data
 
