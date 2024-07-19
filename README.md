@@ -104,16 +104,15 @@ The application uses the colorama library for changing the color of terminal tex
 
 ## Python logic
 - User Validation: Ensures secure login for administrators.
-- Grade Input: Collects grades for Mathematics, English, Physics and Chemestry.
-- Data Insertion: Adds grades to Google Sheets.
-- Grade Collection: Retrieves and displays all stored grades.
-- Averages Calculation: Calculates the average grade for each student subject.
-- Averages Update: Updates Google Sheets with grade average data.
-- Student Ranking: Ranks students based on average grades ascending.
-- Report Card Generation: Produces report cards with personalized comments.
+- total hours Input: Collects total hours for all employees.
+- overtime hours Input: Collects overtime hours for all employees.
+- Data Insertion: Adds total and overtime to Google Sheets.
+- Gross and net pay calculation: Calculates gross and net pay for all employees.
+- Gross and net pay update: Updates Google Sheets with gross and net pay.
+- Pay stubs generation: Produces pay stubs for all employees.
 
 ## APIs used
-- Google Sheets API: For storing, retrieving, and updating grade data.
+- Google Sheets API: For storing, retrieving, and updating employee data.
 
 ## Technologies:
 
@@ -132,6 +131,10 @@ The app is developed using Python.
 ![python validation](assets/images/readme/python-test.png)
 
 [CI Python Linter](https://pep8ci.herokuapp.com/#)
+
+## User story testing
+
+# Feature testing 
 
 ## API Setup
 
