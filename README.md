@@ -138,7 +138,7 @@ The app is developed using Python.
 
 # Feature testing 
 
-![Website Mockup](assets/images/readme/feature_testing.png
+![Website Mockup](assets/images/readme/feature_testing.png)
 
 ## API Setup
 
