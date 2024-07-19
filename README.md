@@ -128,13 +128,17 @@ The app is developed using Python.
 
 **No Errors Where Found**
 
-![python validation](assets/images/readme/python-test.png)
+![python validation](assets/images/readme/testing.png)
 
 [CI Python Linter](https://pep8ci.herokuapp.com/#)
 
 ## User story testing
 
+![User story testing](assets/images/readme/first_time_user_testing.png)
+
 # Feature testing 
+
+![Website Mockup](assets/images/readme/feature_testing.png
 
 ## API Setup
 
@@ -198,6 +202,8 @@ The app is developed using Python.
 - Code Institute's Gitpod Template to generate the workspace for the project.
 - Code institute learnings for general guidance.
 - Techsini to create mockup of website on different iOS devices.
+- Lucidchart to create the flowchart
+- CI python linter to test |Python code
 
 ## Credits
 
